@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  nestjs:
+    build: .
+    container_name: nestjs
+    restart: always
+    ports:
+      - 3001:3001
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    networks:
+      - shared-network
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data/db
+      - ./db-entrypoint.sh:/docker-entrypoint-initdb.d/db-entrypoint.sh
+    networks:
+      - shared-network
+networks:
+  shared-network:
+    driver: bridge

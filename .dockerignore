@@ -1,0 +1,11 @@
+.git
+dist
+node_modules
+data
+.vuepress
+.vscode
+docs
+#.env
+.dockerignore
+
+**/node_modules
